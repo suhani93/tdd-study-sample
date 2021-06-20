@@ -58,7 +58,7 @@ public class Product {
          * @return
          */
         private boolean isNegativePriceValue(int value){
-            return 0 > value;
+            return value < 0;
         }
     }
 
