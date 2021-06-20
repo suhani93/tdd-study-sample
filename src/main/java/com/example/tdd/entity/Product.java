@@ -1,5 +1,8 @@
 package com.example.tdd.entity;
 
+import com.example.tdd.exceptions.DiscountRateException;
+import com.example.tdd.exceptions.NegativePriceValueException;
+
 public class Product {
     private int price;
     private int vat;
@@ -10,7 +13,7 @@ public class Product {
     }
 
     public int getFinalProductPrice() {
-        return 0;
+        return price + vat;
     }
 
 
@@ -26,11 +29,17 @@ public class Product {
         }
 
         public Product.ProductBuilder price(final int price) {
+            if(isNegativePriceValue(price)){
+                throw new NegativePriceValueException("가격에 음수값은 올 수 없습니다.");
+            }
             this.price = price;
             return this;
         }
 
         public Product.ProductBuilder vat(final int vat) {
+            if(isNegativePriceValue(vat)){
+                throw new NegativePriceValueException("부가세에 음수값은 올 수 없습니다.");
+            }
             this.vat = vat;
             return this;
         }
@@ -42,5 +51,15 @@ public class Product {
         public String toString() {
             return "Product.ProductBuilder(price=" + this.price + ", vat=" + this.vat + ")";
         }
+
+        /**
+         * 설정 값이 음수인지 체크하는 메소드
+         * @param value
+         * @return
+         */
+        private boolean isNegativePriceValue(int value){
+            return 0 > value;
+        }
     }
+
 }
