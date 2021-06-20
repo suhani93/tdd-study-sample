@@ -175,7 +175,7 @@ class ProductTest {
                     .build();
             DiscountPolicy discountPolicy = new PercentageDiscountPolicyService();
 
-            int discountPercentage = 0;
+            int discountPercentage = -1;
 
             Assertions.assertThrows(DiscountRateException.class,
                     ()->{
@@ -184,6 +184,39 @@ class ProductTest {
                     "할인 퍼센트가 0퍼센트 미만인데 DiscountRateException이 발생하지 않았습니다."
             );
         }
+
+        @Test
+        @DisplayName("할인 퍼센트가 0퍼센트인 경우")
+        void zeroPercentDiscount() {
+            Product product = Product.builder()
+                    .price(10000)
+                    .vat(1000)
+                    .build();
+            DiscountPolicy discountPolicy = new PercentageDiscountPolicyService();
+
+            int discountPercentage = 0;
+            int productFinalPrice = discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPercentage);
+            Assertions.assertEquals(11000, productFinalPrice, "0퍼센트 할인 시 11000원이여야 합니다.");
+        }
+
+
+        @Test
+        @DisplayName("할인 퍼센트가 100퍼센트인 경우")
+        void oneHundredDiscount() {
+            Product product = Product.builder()
+                    .price(10000)
+                    .vat(1000)
+                    .build();
+            DiscountPolicy discountPolicy = new PercentageDiscountPolicyService();
+
+            int discountPercentage = 100;
+            int productFinalPrice = discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPercentage);
+            Assertions.assertEquals(0, productFinalPrice, "100퍼센트 할인 시 0원이여야 합니다.");
+        }
+
+
+
+
 
         @Test
         @DisplayName("할인 퍼센트가 100퍼센트 이상인 경우")
