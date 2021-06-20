@@ -163,7 +163,7 @@ class ProductTest {
     }
 
 
-    @DisplayName("정률 상품 할인률 예외 상황 테스트")
+    @DisplayName("정률 상품 할인율 예외 상황 테스트")
     @Nested
     public class DiscountRateErrorInPercentageDiscountPolicy {
         @Test
