@@ -44,7 +44,7 @@ class ExchangeRateServiceTest {
             int productFinalPrice = getProductFinalPrice();
 
             DollarExchangeRateService dollarExchangeRateService = new DollarExchangeRateService();
-            int exchangeRate = 1000;
+            int exchangeRate = -1;
 
             Assertions.assertThrows(ExchangeRateException.class , ()->{
                 dollarExchangeRateService.getPriceWithExchangeRate(productFinalPrice, exchangeRate);
@@ -88,7 +88,7 @@ class ExchangeRateServiceTest {
             int productFinalPrice = getProductFinalPrice();
 
             EuroExchangeRateService euroExchangeRateService = new EuroExchangeRateService();
-            int exchangeRate = 1300;
+            int exchangeRate = -1;
 
 
             Assertions.assertThrows(ExchangeRateException.class , ()->{
