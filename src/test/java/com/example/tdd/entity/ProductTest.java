@@ -110,7 +110,6 @@ class ProductTest {
                         discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPrice);
                     },
             "할인 금액이 상품 가격보다 많습니다.");
-
         }
     }
 
@@ -119,7 +118,7 @@ class ProductTest {
     public class percentageDiscountPolicy {
 
         @Test
-        @DisplayName("상품이 10000원 이상인 경우 할인된 상품 가격 테스트")
+        @DisplayName("상품이 10000원 이상인 경우 할인된 상품 가격 테스트 - 11000원")
         void overTenThousandWon() {
             Product product = Product.builder()
                     .price(10000)
@@ -132,9 +131,23 @@ class ProductTest {
             Assertions.assertEquals(9900, productFinalPrice, "상품이 만원 이상이라 정률 할인 10% 할인해서 9900원 이여야 하는데 9900원이 아닙니다.");
         }
 
+        @Test
+        @DisplayName("상품이 10000원 이상인 경우 할인된 상품 가격 테스트- 10000원")
+        void overTenThousandWon2() {
+            Product product = Product.builder()
+                    .price(9100)
+                    .vat(900)
+                    .build();
+            DiscountPolicy discountPolicy = new PercentageDiscountPolicyService();
+
+            int discountPercentage = 10;
+            int productFinalPrice = discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPercentage);
+            Assertions.assertEquals(9000, productFinalPrice, "상품이 만원 이상이라 정률 할인 10% 할인해서 9000원 이여야 하는데 9000원이 아닙니다.");
+        }
+
 
         @Test
-        @DisplayName("상품이 10000원 이하인 경우 할인된 상품 가격 테스트")
+        @DisplayName("상품이 10000원 이하인 경우 할인된 상품 가격 테스트 - 1100원")
         void underTenThousandWon() {
             Product product = Product.builder()
                     .price(1000)
@@ -144,7 +157,7 @@ class ProductTest {
 
             int discountPercentage = 10;
             int productFinalPrice = discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPercentage);
-            Assertions.assertEquals(9900, productFinalPrice, "상품이 만원 이하라 정률 할인 안해서 1100원 이여야 하는데 1100원이 아닙니다.");
+            Assertions.assertEquals(1100, productFinalPrice, "상품이 만원 이하라 정률 할인 안해서 1100원 이여야 하는데 1100원이 아닙니다.");
         }
 
     }
