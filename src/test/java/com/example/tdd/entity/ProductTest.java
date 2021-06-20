@@ -50,7 +50,7 @@ class ProductTest {
     @Nested
     public class flatDiscountPolicy{
         @Test
-        @DisplayName("상품이 1000원 이상인 경우 할인된 상품 가격 테스트")
+        @DisplayName("상품이 1000원 이상인 경우 할인된 상품 가격 테스트 - 1100원")
         void overOneThousandWon(){
             Product product = Product.builder()
                     .price(1000)
@@ -63,7 +63,20 @@ class ProductTest {
         }
 
         @Test
-        @DisplayName("상품이 1000원 이하인 경우 할인된 상품 가격 테스트 - 550원인 경우")
+        @DisplayName("상품이 1000원 이상인 경우 할인된 상품 가격 테스트 - 1000원")
+        void overOneThousandWon2(){
+            Product product = Product.builder()
+                    .price(910)
+                    .vat(90)
+                    .build();
+            DiscountPolicy discountPolicy = new FlatDiscountPolicyService();
+            int discountPrice = 100;
+            int productFinalPrice = discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPrice);
+            Assertions.assertEquals(1000,productFinalPrice, "1000원 이상 상품이라 정액 할인 100원 할인해서 900원 이여야 하는데 900원이 아닙니다.");
+        }
+
+        @Test
+        @DisplayName("상품이 1000원 이하인 경우 할인된 상품 가격 테스트 - 550원")
         void underOneThousandWon(){
             Product product = Product.builder()
                     .price(500)
