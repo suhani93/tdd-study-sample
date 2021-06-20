@@ -76,19 +76,6 @@ class ProductTest {
             Assertions.assertEquals(550,productFinalPrice, "1000원 이하 상품이라 정액 할인 안해서 550원이 정상가격인데 550원이 아닙니다.");
         }
 
-        @Test
-        @DisplayName("상품이 1000원 이하인 경우 할인된 상품 가격 테스트2 - 1000원인 경우")
-        void underOneThousandWon2(){
-            Product product = Product.builder()
-                    .price(910)
-                    .vat(90)
-                    .build();
-            DiscountPolicy discountPolicy = new FlatDiscountPolicyService();
-            int discountPrice = 100;
-            int productFinalPrice = discountPolicy.getDiscountPrice(product.getFinalProductPrice(), discountPrice);
-
-            Assertions.assertEquals(1000,productFinalPrice, "1000원 이하 상품이라 정액 할인 안해서 1000원이 정상가격인데 1000원이 아닙니다.");
-        }
    }
 
     @DisplayName("정액 상품 할인가 예외 상황 테스트")
