@@ -48,7 +48,7 @@ class ProductTest {
 
     @DisplayName("정액 상품 할인 정책 테스트")
     @Nested
-    public class flatDiscountPolicy{
+    public class FlatDiscountPolicy{
         @Test
         @DisplayName("상품이 1000원 이상인 경우 할인된 상품 가격 테스트 - 1100원")
         void overOneThousandWon(){
@@ -115,7 +115,7 @@ class ProductTest {
 
     @DisplayName("정률 상품 할인 정책 가격 테스트")
     @Nested
-    public class percentageDiscountPolicy {
+    public class PercentageDiscountPolicy {
 
         @Test
         @DisplayName("상품이 10000원 이상인 경우 할인된 상품 가격 테스트 - 11000원")
